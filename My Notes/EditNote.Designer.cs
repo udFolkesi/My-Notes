@@ -46,6 +46,8 @@
             this.color_button = new System.Windows.Forms.Button();
             this.nameSetter_textBox = new System.Windows.Forms.TextBox();
             this.save_button = new System.Windows.Forms.Button();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -229,11 +231,22 @@
             this.save_button.UseVisualStyleBackColor = false;
             this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(333, 53);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EditNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.save_button);
             this.Controls.Add(this.nameSetter_textBox);
             this.Controls.Add(this.color_button);
@@ -247,6 +260,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditNote";
             this.Text = "EditNote";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditNote_FormClosing);
+            this.Shown += new System.EventHandler(this.EditNote_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -277,5 +292,7 @@
         private System.Windows.Forms.TextBox nameSetter_textBox;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Button save_button;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }

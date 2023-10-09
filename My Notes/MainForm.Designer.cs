@@ -92,7 +92,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(-1, 15);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(204, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(54, 28);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -232,6 +232,7 @@
             this.sorting_comboBox.Size = new System.Drawing.Size(125, 24);
             this.sorting_comboBox.TabIndex = 7;
             this.sorting_comboBox.Text = "Modif. Date        ↑";
+            this.sorting_comboBox.TextChanged += new System.EventHandler(this.sorting_comboBox_TextChanged);
             // 
             // fileName_label
             // 

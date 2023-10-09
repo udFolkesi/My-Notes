@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_Notes.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,6 @@ namespace My_Notes
     public partial class MainForm : Form
     {
         private string notesPath = @"..\..\Data";
-        private List<(string, string)> values;
         public MainForm()
         {
             InitializeComponent();
@@ -27,21 +27,26 @@ namespace My_Notes
             LoadNotes();
         }
 
-        public void LoadNotes()
+        public void LoadNotes(bool ascending = false)
         {
             if(Directory.GetFiles(notesPath).Length > 0)
             {
                 string[] files = Directory.GetFiles(notesPath);
+                if (ascending)
+                {
+                    files = files.OrderBy(x => File.GetLastWriteTime(x)).ToArray();
+                }
+
                 noNotes_label.Visible = false;
                 Point point = new Point(0, 0);
                 for (int i = 0; i < Directory.GetFiles(notesPath).Length; i++)
                 {
-                    CreateNewListItem(ref point, files[i]);
+                    CreateNewListItem(ref point, files[i], i);
                 }
             }
         }
 
-        private void CreateNewListItem(ref Point point, string fileName)
+        private void CreateNewListItem(ref Point point, string fileName, int index = 0)
         {
             Panel panel = new Panel()
             {
@@ -49,7 +54,7 @@ namespace My_Notes
                 Size = new Size(705, 30),
                 Location = point,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
-            };  
+            };
             Button file_button = new Button()
             {
                 Text = Path.GetFileName(fileName),
@@ -61,7 +66,6 @@ namespace My_Notes
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
             };
             file_button.FlatAppearance.BorderSize = 0;
-            file_button.MouseEnter += new EventHandler(file_button_MouseEnter);
             file_button.Click += new EventHandler(file_button_Click);
             point.Y += 4;
             Label label = new Label()
@@ -74,18 +78,28 @@ namespace My_Notes
             };
             Button delete_button = new Button()
             {
-                Size = new Size(20, 20),
+                Image = Resources.icons8_trash_24,
+                Size = new Size(15, 20),
                 FlatStyle = FlatStyle.Flat,
                 Location = new Point(650, 5),
+                Cursor = Cursors.Hand,
+                //Visible = false,
             };
             delete_button.FlatAppearance.BorderSize = 0;
-            files_panel.Controls.Add(panel);
+            delete_button.MouseEnter += new EventHandler(delete_button_MouseEnter);
             panel.Controls.Add(file_button);
             panel.Controls.Add(label);
             panel.Controls.Add(delete_button);
+            files_panel.Controls.Add(panel);
+            file_button.MouseEnter += new EventHandler(panel_MouseEnter);
+            file_button.MouseLeave += new EventHandler(panel_MouseLeave);
+            delete_button.MouseEnter += new EventHandler(delete_button_MouseEnter);
+            delete_button.MouseLeave += new EventHandler(delete_button_MouseLeave);
+            files_panel.Controls[index].Controls[2].Click += new EventHandler(delete_button_Click);
             label.BringToFront();
             delete_button.BringToFront();
             point.Y += 35;
+            files_panel.Controls[index].BringToFront();
         }
 
         private void search_pictureBox_Click(object sender, EventArgs e)
@@ -114,11 +128,6 @@ namespace My_Notes
             newNote.Show();
         }
 
-        private void file_button_MouseEnter(object sender, EventArgs e)
-        {
-
-        }
-
         private void file_button_Click(object sender, EventArgs e)
         {
             if(sender is Button button)
@@ -138,6 +147,66 @@ namespace My_Notes
         private void allNotesToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             LoadNotes();
+        }
+
+        private void panel_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                //button.Parent.Controls[0].Visible = true;
+                button.Parent.Controls[1].BackColor = Color.Silver;
+                //button.Parent.Controls[0].BackColor = Color.Gray;
+            }
+        }
+
+        private void panel_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                //button.Parent.Controls[0].Visible = false;
+                button.Parent.Controls[1].BackColor = Color.LightGray;
+            }
+        }
+
+        private void delete_button_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                //button.Parent.Controls[0].Visible = true;
+                button.Parent.Controls[0].BackColor = Color.Coral;
+            }
+        }
+
+        private void delete_button_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                //button.Parent.Controls[0].Visible = false;
+                button.Parent.Controls[0].BackColor = Color.Transparent;
+            }
+        }
+
+        private void delete_button_Click(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                File.Delete(Path.Combine(notesPath, button.Parent.Controls[2].Text));
+                files_panel.Controls.Clear();
+                LoadNotes();
+            }
+        }
+
+        private void sorting_comboBox_TextChanged(object sender, EventArgs e)
+        {
+            files_panel.Controls.Clear();
+            if (sorting_comboBox.Text != "Modif. Date        ↓")
+            {
+                LoadNotes(true);
+            }
+            else
+            {
+                LoadNotes();
+            }
         }
     }
 }

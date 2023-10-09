@@ -28,7 +28,6 @@ namespace My_Notes
         public EditNote()
         {
             InitializeComponent();
-
             FillComboBoxes();
         }
 
@@ -96,6 +95,42 @@ namespace My_Notes
             {
                 nameSetter_textBox.Text = string.Empty;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                color_button.Text = colorDialog1.Color.Name.ToString();
+                color_button.ForeColor = colorDialog1.Color;
+                canvas_richTextBox.SelectionColor = colorDialog1.Color;
+            }
+        }
+
+        private void EditNote_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(canvas_richTextBox.Tag is true)
+            {
+                DialogResult dialogResult = MessageBox.Show("Changes made were not saved. Would you like to save your note before closing?\"", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK)
+                {
+                    SaveFile();
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void canvas_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            canvas_richTextBox.Tag = true;
+        }
+
+        private void EditNote_Shown(object sender, EventArgs e)
+        {
+            canvas_richTextBox.TextChanged += new EventHandler(canvas_richTextBox_TextChanged);
         }
     }
 }
