@@ -15,7 +15,7 @@ namespace My_Notes
 {
     public partial class MainForm : Form
     {
-        private string notesPath = @"..\..\Data";
+        private readonly string notesPath = @"..\..\Data";
         public MainForm()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace My_Notes
 
         public void LoadNotes(bool ascending = false)
         {
-            if(Directory.GetFiles(notesPath).Length > 0)
+            if (Directory.GetFiles(notesPath).Length > 0)
             {
                 string[] files = Directory.GetFiles(notesPath);
                 if (ascending)
@@ -83,7 +83,6 @@ namespace My_Notes
                 FlatStyle = FlatStyle.Flat,
                 Location = new Point(650, 5),
                 Cursor = Cursors.Hand,
-                //Visible = false,
             };
             delete_button.FlatAppearance.BorderSize = 0;
             delete_button.MouseEnter += new EventHandler(delete_button_MouseEnter);
@@ -99,7 +98,6 @@ namespace My_Notes
             label.BringToFront();
             delete_button.BringToFront();
             point.Y += 35;
-            files_panel.Controls[index].BringToFront();
         }
 
         private void search_pictureBox_Click(object sender, EventArgs e)
@@ -118,24 +116,24 @@ namespace My_Notes
 
         private void addNew_button_Click(object sender, EventArgs e)
         {
-            EditNote editNote = new EditNote();
-            editNote.Show();
+            EditForm editForm = new EditForm();
+            editForm.Show();
         }
 
         private void newNoteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            EditNote newNote = new EditNote();
+            EditForm newNote = new EditForm();
             newNote.Show();
         }
 
         private void file_button_Click(object sender, EventArgs e)
         {
-            if(sender is Button button)
+            if (sender is Button button)
             {
-                EditNote editNote = new EditNote();
-                editNote.Show();
-                editNote.RichTextBox.LoadFile($"{notesPath}/{button.Text}", RichTextBoxStreamType.RichText);
-                editNote.TextBox.Text = button.Text;
+                EditForm editForm = new EditForm();
+                editForm.Show();
+                editForm.RichTextBox.LoadFile($"{notesPath}/{button.Text}", RichTextBoxStreamType.RichText);
+                editForm.TextBox.Text = button.Text;
             }
         }
 
@@ -153,9 +151,7 @@ namespace My_Notes
         {
             if (sender is Button button)
             {
-                //button.Parent.Controls[0].Visible = true;
                 button.Parent.Controls[1].BackColor = Color.Silver;
-                //button.Parent.Controls[0].BackColor = Color.Gray;
             }
         }
 
@@ -163,7 +159,6 @@ namespace My_Notes
         {
             if (sender is Button button)
             {
-                //button.Parent.Controls[0].Visible = false;
                 button.Parent.Controls[1].BackColor = Color.LightGray;
             }
         }
@@ -172,7 +167,6 @@ namespace My_Notes
         {
             if (sender is Button button)
             {
-                //button.Parent.Controls[0].Visible = true;
                 button.Parent.Controls[0].BackColor = Color.Coral;
             }
         }
@@ -181,7 +175,6 @@ namespace My_Notes
         {
             if (sender is Button button)
             {
-                //button.Parent.Controls[0].Visible = false;
                 button.Parent.Controls[0].BackColor = Color.Transparent;
             }
         }

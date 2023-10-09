@@ -10,3 +10,15 @@ C:\Users\USER\source\repos\My Notes\My Notes\obj\Debug\My Notes.exe
 C:\Users\USER\source\repos\My Notes\My Notes\obj\Debug\My Notes.pdb
 C:\Users\USER\source\repos\My Notes\My Notes\obj\Debug\My_Notes.EditNote.resources
 C:\Users\USER\source\repos\My Notes\My Notes\obj\Debug\My_Notes.MainForm.resources
+C:\Users\USER\source\repos\My-Notes\My Notes\bin\Debug\My Notes.exe.config
+C:\Users\USER\source\repos\My-Notes\My Notes\bin\Debug\My Notes.exe
+C:\Users\USER\source\repos\My-Notes\My Notes\bin\Debug\My Notes.pdb
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My Notes.csproj.AssemblyReference.cache
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My Notes.csproj.SuggestedBindingRedirects.cache
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My_Notes.EditForm.resources
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My_Notes.MainForm.resources
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My_Notes.Properties.Resources.resources
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My Notes.csproj.GenerateResource.cache
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My Notes.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My Notes.exe
+C:\Users\USER\source\repos\My-Notes\My Notes\obj\Debug\My Notes.pdb

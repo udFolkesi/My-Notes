@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace My_Notes
 {
-    public partial class EditNote : Form
+    public partial class EditForm : Form
     {
-        private string notesPath = @"..\..\Data";
+        private readonly string notesPath = @"..\..\Data";
         public RichTextBox RichTextBox
         {
             get { return canvas_richTextBox; }
@@ -25,7 +25,7 @@ namespace My_Notes
             set { nameSetter_textBox = value; }
         }
 
-        public EditNote()
+        public EditForm()
         {
             InitializeComponent();
             FillComboBoxes();
@@ -55,7 +55,7 @@ namespace My_Notes
 
         private void color_button_Click(object sender, EventArgs e)
         {
-            if(colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 color_button.Text = colorDialog1.Color.Name.ToString();
                 color_button.ForeColor = colorDialog1.Color;
@@ -107,9 +107,9 @@ namespace My_Notes
             }
         }
 
-        private void EditNote_FormClosing(object sender, FormClosingEventArgs e)
+        private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(canvas_richTextBox.Tag is true)
+            if (canvas_richTextBox.Tag is true && canvas_richTextBox.Text != File.ReadAllText($"{notesPath}/{nameSetter_textBox.Text}"))
             {
                 DialogResult dialogResult = MessageBox.Show("Changes made were not saved. Would you like to save your note before closing?\"", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.OK)
@@ -128,7 +128,7 @@ namespace My_Notes
             canvas_richTextBox.Tag = true;
         }
 
-        private void EditNote_Shown(object sender, EventArgs e)
+        private void EditForm_Shown(object sender, EventArgs e)
         {
             canvas_richTextBox.TextChanged += new EventHandler(canvas_richTextBox_TextChanged);
         }
