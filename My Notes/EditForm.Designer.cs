@@ -47,7 +47,8 @@
             this.nameSetter_textBox = new System.Windows.Forms.TextBox();
             this.save_button = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bold_checkBox = new System.Windows.Forms.CheckBox();
+            this.italic_checkBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -146,6 +147,7 @@
             // 
             // fonts_comboBox
             // 
+            this.fonts_comboBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.fonts_comboBox.FormattingEnabled = true;
             this.fonts_comboBox.Location = new System.Drawing.Point(65, 53);
             this.fonts_comboBox.Name = "fonts_comboBox";
@@ -184,6 +186,7 @@
             // 
             // canvas_richTextBox
             // 
+            this.canvas_richTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.canvas_richTextBox.Location = new System.Drawing.Point(65, 98);
             this.canvas_richTextBox.Name = "canvas_richTextBox";
             this.canvas_richTextBox.Size = new System.Drawing.Size(707, 326);
@@ -192,15 +195,17 @@
             // 
             // color_button
             // 
-            this.color_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.color_button.Font = new System.Drawing.Font("Arial Black", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.color_button.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.color_button.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.color_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.color_button.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.color_button.ForeColor = System.Drawing.Color.Black;
-            this.color_button.Location = new System.Drawing.Point(245, 53);
+            this.color_button.Location = new System.Drawing.Point(296, 53);
             this.color_button.Name = "color_button";
             this.color_button.Size = new System.Drawing.Size(71, 24);
             this.color_button.TabIndex = 15;
             this.color_button.Text = "Black";
-            this.color_button.UseVisualStyleBackColor = true;
+            this.color_button.UseVisualStyleBackColor = false;
             this.color_button.Click += new System.EventHandler(this.color_button_Click);
             // 
             // nameSetter_textBox
@@ -231,22 +236,45 @@
             this.save_button.UseVisualStyleBackColor = false;
             this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
-            // button1
+            // bold_checkBox
             // 
-            this.button1.Location = new System.Drawing.Point(333, 53);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.bold_checkBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bold_checkBox.AutoSize = true;
+            this.bold_checkBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.bold_checkBox.FlatAppearance.BorderSize = 0;
+            this.bold_checkBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bold_checkBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bold_checkBox.Location = new System.Drawing.Point(236, 52);
+            this.bold_checkBox.Name = "bold_checkBox";
+            this.bold_checkBox.Size = new System.Drawing.Size(27, 26);
+            this.bold_checkBox.TabIndex = 20;
+            this.bold_checkBox.Text = "B";
+            this.bold_checkBox.UseVisualStyleBackColor = false;
+            this.bold_checkBox.CheckedChanged += new System.EventHandler(this.bold_checkBox_CheckedChanged);
             // 
-            // EditNote
+            // italic_checkBox
+            // 
+            this.italic_checkBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.italic_checkBox.AutoSize = true;
+            this.italic_checkBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.italic_checkBox.FlatAppearance.BorderSize = 0;
+            this.italic_checkBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.italic_checkBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.italic_checkBox.Location = new System.Drawing.Point(265, 52);
+            this.italic_checkBox.Name = "italic_checkBox";
+            this.italic_checkBox.Size = new System.Drawing.Size(26, 26);
+            this.italic_checkBox.TabIndex = 21;
+            this.italic_checkBox.Text = "K";
+            this.italic_checkBox.UseVisualStyleBackColor = false;
+            this.italic_checkBox.CheckedChanged += new System.EventHandler(this.italic_checkBox_CheckedChanged);
+            // 
+            // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.italic_checkBox);
+            this.Controls.Add(this.bold_checkBox);
             this.Controls.Add(this.save_button);
             this.Controls.Add(this.nameSetter_textBox);
             this.Controls.Add(this.color_button);
@@ -258,7 +286,7 @@
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.pictureBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "EditNote";
+            this.Name = "EditForm";
             this.Text = "EditNote";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditForm_FormClosing);
             this.Shown += new System.EventHandler(this.EditForm_Shown);
@@ -293,6 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Button save_button;
         private System.Windows.Forms.FontDialog fontDialog1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox bold_checkBox;
+        private System.Windows.Forms.CheckBox italic_checkBox;
     }
 }

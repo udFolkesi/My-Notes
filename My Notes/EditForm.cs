@@ -75,7 +75,7 @@ namespace My_Notes
 
         private void SaveFile()
         {
-            if (nameSetter_textBox.Text != string.Empty)
+            if (nameSetter_textBox.Text != string.Empty && nameSetter_textBox.Text != "Note Name...")
             {
                 canvas_richTextBox.SaveFile($"{notesPath}/{nameSetter_textBox.Text}", RichTextBoxStreamType.RichText);
                 if (Application.OpenForms["MainForm"] != null)
@@ -85,7 +85,7 @@ namespace My_Notes
             }
             else
             {
-                MessageBox.Show("Please, give your file a name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please, give your file a name", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -97,7 +97,7 @@ namespace My_Notes
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void italic_button_Click(object sender, EventArgs e)
         {
             if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -109,18 +109,39 @@ namespace My_Notes
 
         private void EditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (canvas_richTextBox.Tag is true && canvas_richTextBox.Text != File.ReadAllText($"{notesPath}/{nameSetter_textBox.Text}"))
+            bool fileExists = false;
+            if (File.Exists($"{notesPath}/{nameSetter_textBox.Text}"))
+            {
+                fileExists = true;
+            }
+
+            if (canvas_richTextBox.Tag is true && !fileExists)             
             {
                 DialogResult dialogResult = MessageBox.Show("Changes made were not saved. Would you like to save your note before closing?\"", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.OK)
+                if (dialogResult == DialogResult.Yes)
                 {
                     SaveFile();
+                    e.Cancel = true;
                 }
                 else if (dialogResult == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                 }
             }
+/*            else if(canvas_richTextBox.Tag is true && fileExists
+                && canvas_richTextBox.Text != File.ReadAllText($"{notesPath}/{nameSetter_textBox.Text}"))
+            {
+                DialogResult dialogResult = MessageBox.Show("Changes made were not saved. Would you like to save your note before closing?\"", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveFile();
+                    e.Cancel = true;
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }*/
         }
 
         private void canvas_richTextBox_TextChanged(object sender, EventArgs e)
@@ -131,6 +152,29 @@ namespace My_Notes
         private void EditForm_Shown(object sender, EventArgs e)
         {
             canvas_richTextBox.TextChanged += new EventHandler(canvas_richTextBox_TextChanged);
+        }
+
+        private void bold_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SetFontStyle();
+        }
+
+        private void italic_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SetFontStyle();
+        }
+
+        private void SetFontStyle()
+        {
+            FontStyle style = FontStyle.Regular;
+
+            if (bold_checkBox.Checked)
+                style |= FontStyle.Bold;
+
+            if (italic_checkBox.Checked)
+                style |= FontStyle.Italic;
+
+            canvas_richTextBox.SelectionFont = new Font(fonts_comboBox.Text, Convert.ToInt32(fontSizes_comboBox.Text), style);
         }
     }
 }
